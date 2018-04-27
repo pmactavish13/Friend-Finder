@@ -2,7 +2,7 @@ var friends = [
     {
         routeName: "rover",
         name: "rover",
-        photo: "https://cdn.pixabay.com/photo/2014/03/05/19/23/dog-280332_1280.jpg",
+        photo: "https://tse2.mm.bing.net/th?id=OIP.P4xwr0yE10-xGW1OKGB_WAHaEo&w=296&h=177&c=7&o=5&dpr=2&pid=1.7",
         scores: [
             "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"
         ]

@@ -7,8 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -279,11 +278,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-
+                    <h3 class="modal-title">Best Match</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title">Best Match</h3>
+                    
                 </div>
                 <div class="modal-body">
                     <hr class="row" id="line-marker">
@@ -296,45 +295,48 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $("#submit").on("click", function (event) {
-            event.preventDefault();
-            // check that input is valid
-            for (var i = 1; i < 11; i++) {
-                if ($.trim($("#question" + [i]).val()) === "" || $("#question" + [i]).val().trim() === "Select an Option") {
-                    return false;
-                };
-            };
-            if ($.trim($("#name").val()) === "" || $.trim($("#name").val()) === "name") {
-                $("#name").val("Enter a valid name");
-                return false;
-            } else if ($.trim($("#photo").val()) === "" || $.trim($("#url").val()) === "photo") {
-                $("#photo").val("Enter a url address");
-                return false;
-            } else {
-                var userInput = {
-                    name: $("#name").val().trim(),
-                    photo: $("#photo").val().trim(),
-                    scores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()]
-                };
-                var currentURL = window.location.origin;
-                console.log(currentURL);
-                // AJAX post the data to the friends API. 
-                $.post(currentURL + "/api/friends", userInput, function (input) {
-                    // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                    $("#matchName").text(input.name);
-                    $('#matchImg').attr("src", input.photo);
-                    // Show the modal with the best match 
-                    $("#resultsModal").modal('toggle');
-                });
-                console.log(userInput);
-                console.log(userInput.scores);
-            };
-        });
-    </script>
-
-
 </body>
+
+<script>
+
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
+        // check that input is valid
+        for (var i = 1; i < 11; i++) {
+            if ($.trim($("#question" + [i]).val()) === "" || $("#question" + [i]).val().trim() === "Select an Option") {
+                alert("Please fill out all fields before submitting!");
+                return false;
+            };
+        };
+        if ($.trim($("#name").val()) === "" || $.trim($("#name").val()) === "name") {
+            alert("Please fill out all fields before submitting!");
+            $("#name").val("Enter a valid name");
+            return false;
+        } else if ($.trim($("#photo").val()) === "" || $.trim($("#url").val()) === "photo") {
+            $("#photo").val("Enter a url address");
+            alert("Please fill out all fields before submitting!");
+            return false;
+        } else {
+            var newFriend = {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                scores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()]
+            };
+            console.log(newFriend);
+            console.log(newFriend.scores);
+
+            var currentURL = window.location.origin;
+            $.post("/api/friends", newFriend, function (data) {
+
+                console.log(data)
+                $("#matchName").text(data.name);
+                $("#matchImg").attr("src", data.photo);
+                // Show the modal with the best match 
+                $("#resultsModal").modal("toggle");
+
+            });
+        };
+    });
+</script>
 
 </html>
