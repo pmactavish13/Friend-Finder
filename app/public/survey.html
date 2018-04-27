@@ -21,7 +21,7 @@
         }
 
         #container {
-            margin: 40 90 40 90;
+            margin: 40 65 40 90;
         }
 
         h3 {
@@ -285,7 +285,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Best Match</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" onclick="location.reload()" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     
@@ -295,7 +295,7 @@
                     <img id="matchImg" src="http://via.placeholder.com/350x250" alt="">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.reload()" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -332,16 +332,15 @@
 
             var currentURL = window.location.origin;
             $.post("/api/friends", newFriend, function (data) {
-
-                console.log(data)
                 $("#matchName").text(data.name);
                 $("#matchImg").attr("src", data.photo);
                 // Show the modal with the best match 
                 $("#resultsModal").modal("toggle");
-
             });
         };
     });
+
+
 </script>
 
 </html>
