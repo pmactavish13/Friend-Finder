@@ -18,7 +18,7 @@ app.use(bodyParser.json({
 
 //api routes
 require('./app/routing/apiRoutes.js')(app);
-//include htmlRoutes
+//html routes
 require('./app/routing/htmlRoutes.js')(app);
 
 // initiates the server 

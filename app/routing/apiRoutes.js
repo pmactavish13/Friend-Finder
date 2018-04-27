@@ -13,19 +13,19 @@ module.exports = function (app) {
             friendDifference: 100
         };
 
-        // parse user input
+        // parse user input - data sent from survey.html
         var newFriend = req.body;
         var newScores = newFriend.scores;
 
         // loop through all the friends database. 
         for (var i = 0; i < friends.length; i++) {
             var scoreDifference = 0;
-            
+
             // loop through scores of each friend to calculate score difference
             for (var h = 0; h < friends[i].scores[h]; h++) {
                 scoreDifference += Math.abs(parseInt(newScores[h]) - parseInt(friends[i].scores[h]));
 
-                // sets "best match" at first loop then updates each subsequent loop
+                // set "best match" at first loop then updates each subsequent loop
                 if (scoreDifference <= bestMatch.friendDifference) {
                     bestMatch.name = friends[i].name;
                     bestMatch.photo = friends[i].photo;

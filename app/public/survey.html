@@ -318,7 +318,7 @@
             $("#name").val("Enter a valid name");
             return false;
         } else if ($.trim($("#photo").val()) === "" || $.trim($("#url").val()) === "photo") {
-            $("#photo").val("Enter a url address");
+            $("#photo").val("Enter a valid url address");
             alert("Please fill out all fields before submitting!");
             return false;
         } else {
@@ -327,9 +327,7 @@
                 photo: $("#photo").val().trim(),
                 scores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()]
             };
-            console.log(newFriend);
-            console.log(newFriend.scores);
-
+            
             var currentURL = window.location.origin;
             $.post("/api/friends", newFriend, function (data) {
                 $("#matchName").text(data.name);
