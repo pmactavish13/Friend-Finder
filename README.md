@@ -15,9 +15,11 @@ htmlRoutes.js file including two routes:
 
 apiRoutes.js file contains two routes:
     A GET route with the url /api/friends used to display a JSON of all possible friends.
-    A POST routes /api/friends used to handle incoming survey results. This route is also be used to handle the compatibility logic.
+    A POST routes /api/friends used to handle incoming survey results. This route is also used to handle the compatibility logic.
+
 data folder with a file of stored users information
-public folder with home and survey html pages   
+
+public folder with home and survey html pages.  The survey.html takes input and sends it to the apiRoutes.js then records the response.   
     
 Each user's results are stored in a simple array of numbers (ex: [5, 1, 4, 4, 5, 1, 2, 5, 4, 1]). The difference between current user's scores is compared against those from other users, question by question. The differences are then added up to calculate the totalDifference.  Lowest difference = best match.
 
